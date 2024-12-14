@@ -32,8 +32,8 @@ jobs:
           image: yanwk/barotrauma-server
           tags: slim
       - 
-        name: Push to Docker Hub
-        id: push-to-dockerhub
+        name: Push to ghcr
+        id: push-to-ghcr
         uses: redhat-actions/push-to-registry@v2
         with:
           registry: ghcr.io
