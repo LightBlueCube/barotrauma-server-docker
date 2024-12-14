@@ -29,7 +29,7 @@ jobs:
           oci: false
           context: .
           containerfiles: Dockerfile.slim
-          image: yanwk/barotrauma-server
+          image: lightbluecube/barotrauma-server
           tags: slim
       - 
         name: Push to ghcr
@@ -39,4 +39,4 @@ jobs:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
-          image: yanwk/barotrauma-server:slim
+          image: lightbluecube/barotrauma-server:slim
