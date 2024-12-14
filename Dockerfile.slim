@@ -82,7 +82,7 @@ EXPOSE 27015/udp 27016/udp
 CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
     && chown -R runner:runner "${GAMEDIR}/" \
-    && echo "GAMEDIR=${GAMEDIR}, STEAMAPPID=${STEAMAPPID}, FIX_PATH=${FIX_PATH}, FIX_LINKPATH=${FIX_LINKPATH}"
+    && echo "GAMEDIR=${GAMEDIR}, STEAMAPPID=${STEAMAPPID}, FIX_PATH=${FIX_PATH}, FIX_LINKPATH=${FIX_LINKPATH}" \
     && su runner -c "
         if [ -f \"${GAMEDIR}/DedicatedServer\" ]; then
             steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} +'quit';
