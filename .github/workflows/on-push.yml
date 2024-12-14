@@ -32,10 +32,11 @@ jobs:
           image: lightbluecube/barotrauma-server
           tags: slim
       - 
-        name: Save image as tar
+        name: Save image as tar using podman
         run: |
-          buildah pull localhost/lightbluecube/barotrauma-server:slim
-          buildah save --format docker-dir localhost/lightbluecube/barotrauma-server:slim slim-image.tar
+          sudo apt-get update
+          sudo apt-get install -y podman
+          podman save -o slim-image.tar localhost/lightbluecube/barotrauma-server:slim
       - 
         name: Upload image artifact
         uses: actions/upload-artifact@v3
