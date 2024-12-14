@@ -83,16 +83,4 @@ CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
     && chown -R runner:runner "${GAMEDIR}/" \
     && echo "test=0.1 GAMEDIR=${GAMEDIR}, STEAMAPPID=${STEAMAPPID}, FIX_PATH=${FIX_PATH}, FIX_LINKPATH=${FIX_LINKPATH}" \
-    && su runner -c 'if [ -f "${GAMEDIR}/DedicatedServer" ] ; then \
-            steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} +'quit' ; \
-        else \
-            steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} validate +'quit' ; \
-        fi \
-        && mkdir -p "${GAMEDIR}/Daedalic Entertainment GmbH/Barotrauma/Multiplayer" \
-        && mkdir -p "${FIX_PATH}/Daedalic Entertainment GmbH" \
-        && if [ ! -L "${FIX_LINKPATH}" ] ; then \
-            ln -s "${FIX_PATH}" "${FIX_LINKPATH}" ; \
-        fi \
-        && "${GAMEDIR}/DedicatedServer"\
-    '
-
+    && su runner -c 'if [ -f "${GAMEDIR}/DedicatedServer" ]; then steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} +'quit'; else steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} validate +'quit'; fi; && mkdir -p "${GAMEDIR}/Daedalic Entertainment GmbH/Barotrauma/Multiplayer"; && mkdir -p "${FIX_PATH}/Daedalic Entertainment GmbH"; && if [ ! -L "${FIX_LINKPATH}" ]; then ln -s "${FIX_PATH}" "${FIX_LINKPATH}"; fi; && "${GAMEDIR}/DedicatedServer";'
