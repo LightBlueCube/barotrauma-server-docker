@@ -69,6 +69,8 @@ RUN set -eux \
 ENV FIX_PATH="${GAMEDIR}/Daedalic Entertainment GmbH/Barotrauma"
 ENV FIX_LINKPATH="${FIX_PATH}/Daedalic Entertainment GmbH/Barotrauma"
 
+COPY --chown=runner:runner start_server.sh /home/runner/start_server.sh
+
 # 1. Update SteamCMD on every start.
 # 2. Use root to chown uploaded files. But will run server in low-privilege.
 # 3. If the executable file "DedicatedServer" doesn't exist, SteamCMD will download, install and validate the server.
@@ -83,15 +85,4 @@ CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
     && chown -R runner:runner "${GAMEDIR}/" \
     && echo "test=0.1 GAMEDIR=${GAMEDIR}, STEAMAPPID=${STEAMAPPID}, FIX_PATH=${FIX_PATH}, FIX_LINKPATH=${FIX_LINKPATH}" \
-    && su runner -c 'if [ -f "${GAMEDIR}/DedicatedServer" ] ; then \
-            steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} +'quit' ; \
-        else \
-            steamcmd @ShutdownOnFailedCommand @NoPromptForPassword +login anonymous +app_update ${STEAMAPPID} validate +'quit' ; \
-        fi \
-        && mkdir -p "${GAMEDIR}/Daedalic Entertainment GmbH/Barotrauma/Multiplayer" \
-        && mkdir -p "${FIX_PATH}/Daedalic Entertainment GmbH" \
-        && if [ ! -L "${FIX_LINKPATH}" ] ; then \
-            ln -s "${FIX_PATH}" "${FIX_LINKPATH}" ; \
-        fi \
-        && "${GAMEDIR}/DedicatedServer"\
-    '
+    && su runner -c "bash /home/runner/start_server.sh"
