@@ -85,3 +85,5 @@ CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
     && chown -R runner:runner "${GAMEDIR}/"
 #    && su runner -c "bash /home/runner/start_server.sh"
+
+CMD ["tail", "-f", "/dev/null"]
