@@ -83,6 +83,5 @@ EXPOSE 27015/udp 27016/udp
 
 CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
-    && chown -R runner:runner "${GAMEDIR}/" \
-    && echo "test=0.1 GAMEDIR=${GAMEDIR}, STEAMAPPID=${STEAMAPPID}, FIX_PATH=${FIX_PATH}, FIX_LINKPATH=${FIX_LINKPATH}" \
-    && su runner -c "bash /home/runner/start_server.sh"
+    && chown -R runner:runner "${GAMEDIR}/"
+#    && su runner -c "bash /home/runner/start_server.sh"
