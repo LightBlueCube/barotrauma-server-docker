@@ -84,5 +84,4 @@ EXPOSE 27015/udp 27016/udp
 CMD steamcmd +'quit' \
     && rm -rf /tmp/dumps \
     && chown -R runner:runner "${GAMEDIR}/" \
-    && tail -f /dev/null
-#    && su runner -c "bash /home/runner/start_server.sh"
+    && su runner -c "bash /home/runner/start_server.sh"
